@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: platform-vkdr-devportal-catalog-info
+  description: Importing templates, apis, environments, clusters and teams
+spec:
+  targets:
+    - ./apis/*.yaml
+    - ./templates/templates.yaml
+    - ./environments/environments.yaml
+    - ./clusters/clusters.yaml
+    - ./components/components.yaml
+    - ./team/*.yaml
