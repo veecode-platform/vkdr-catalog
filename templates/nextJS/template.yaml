@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: next-template-github
+  name: next-template-vkdr-github
   title: NextJS Template
   description: Create a website powered with Next.js with Styled Components
   annotations:
