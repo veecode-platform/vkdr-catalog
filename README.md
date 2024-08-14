@@ -1,3 +1,3 @@
-# demo-catalog
+# vkdr-catalog
 
-This is a repository with apis and templates for devportal demo.
+This is a repository with apis and templates for devportal vkdr envioronment.
