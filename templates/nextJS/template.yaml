@@ -32,6 +32,7 @@ spec:
           title: Owner
           type: string
           description: Owner of the component
+          default: "group:default/demo"        
           ui:field: OwnerPicker
           ui:options:
             allowedKinds:
@@ -43,6 +44,7 @@ spec:
         repoUrl:
           title: Repository Location
           type: string
+          reuseName: componentId          
           ui:field: RepoUrlSelector
           ui:options:
             allowedHosts:
