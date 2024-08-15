@@ -9,10 +9,10 @@ permalink: /assets/minima-social-icons.svg
   in the footer and therefore inject the "rss" icon outside the iteration loop.
 {% endcomment %}
 {% for entry in site.minima.social_links %}
-  {%- assign symbol_id = entry.platform -%}
-  {%- unless symbol_id == "rss" -%}
-    {%- include svg_symbol.html key = symbol_id -%}
+  ${{'{%-'}} assign symbol_id = entry.platform ${{'-%}'}}
+  ${{'{%-'}} unless symbol_id == "rss" ${{'-%}'}}
+    ${{'{%-'}} include svg_symbol.html key = symbol_id ${{'-%}'}}
   {% endunless %}
-{%- endfor -%}
-  {%- include svg_symbol.html key = "rss" -%}
+${{'{%-'}} endfor ${{'-%}'}}
+  ${{'{%-'}} include svg_symbol.html key = "rss" ${{'-%}'}}
 </svg>
