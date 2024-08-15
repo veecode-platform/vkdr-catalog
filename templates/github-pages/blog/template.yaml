@@ -45,6 +45,7 @@ spec:
         repoUrl:
           title: Repository Location
           type: string
+          reuseName: componentId          
           ui:field: RepoUrlSelector
           ui:options:
             allowedHosts:
@@ -59,7 +60,6 @@ spec:
             - 'Public'
             - 'Private'
           default: private
- 
   steps:
     - id: template
       name: Fetch Skeleton + Template
