@@ -6,6 +6,7 @@ metadata:
 spec:
   targets:
     - ./nextJS/template.yaml
+    - ./github-pages/blog/template.yaml
     # - ./devops/openapi-project/template.yaml
     # - ./java/spring-boot-3/template.yaml
     # - ./java/quarkus/template.yaml
