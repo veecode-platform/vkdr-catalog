@@ -2,13 +2,13 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: github-pages-blog-template-github
-  title: Github-Pages Simple Blog Template
+  title: Github Pages Simple Blog Template
   description: Create a blog website powered with Github-Pages
   annotations:
     backstage.io/techdocs-ref: dir:.
   tags:
     - platform-templates
-    - Github-Pages
+    - github-pages
     - blog
 spec:
   owner: veecode/platform
