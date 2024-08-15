@@ -1,0 +1,8 @@
+site_name: Github Pages Simple Blog Template
+site_description: Template for Simple Blog
+
+nav:
+  - Introduction: index.md
+
+plugins:
+  - techdocs-core
