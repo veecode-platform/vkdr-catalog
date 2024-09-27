@@ -1,0 +1,13 @@
+apiVersion: veecode.backstage.io/v1alpha1
+kind: Cluster
+metadata:
+  name: "cluster-vkdr-local"
+  environment:
+    domain: localhost
+    ingress_type: kong
+  annotations:
+    github.com/project-slug: veecode-platform/vkdr-catalog
+spec:
+  lifecycle: experimental
+  owner: "group:default/admin"
+  environment: 'environment:default/environment-vkdr-local'

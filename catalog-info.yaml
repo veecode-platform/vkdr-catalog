@@ -6,8 +6,9 @@ metadata:
 spec:
   targets:
     - ./templates/templates.yaml
+    - ./environments/environment-vkdr-local.yaml
+    - ./clusters/cluster-vkdr-local.yaml
     # - ./apis/*.yaml
-    # - ./environments/environments.yaml
     # - ./clusters/clusters.yaml
     # - ./components/components.yaml
     # - ./team/*.yaml
