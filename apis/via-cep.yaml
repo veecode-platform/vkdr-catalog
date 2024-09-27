@@ -28,7 +28,7 @@ spec:
         description: Find out more about Swagger
         url: http://swagger.io
     servers:
-        - url: https://viacep.com.br/
+        - url: http://localhost:8000/
     tags:
         - name: Address
           description: Getting zip-code informations
@@ -36,7 +36,7 @@ spec:
             description: Find out more
             url: http://swagger.io
     paths:
-        '/ws/{zip-code}/json':
+        '/cep/{zip-code}/json':
             get:
                 tags:
                     - Address
