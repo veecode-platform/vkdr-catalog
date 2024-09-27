@@ -8,7 +8,7 @@ metadata:
   annotations:
     github.com/project-slug: veecode-platform/vkdr-catalog
 spec:
-  type: teste
+  type: ec2
   lifecycle: experimental
   owner: "group:default/admin"
   environment: 'environment:default/environment-vkdr-local'
