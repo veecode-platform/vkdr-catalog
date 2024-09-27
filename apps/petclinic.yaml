@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: petclinic
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: veecode-platform/vkdr-catalog
+    kong-manager/service-name: vkdr.petclinic.80                   
+    kong-manager/instance: /kong-manager/cluster-vkdr-local
+spec:
+  type: service
+  lifecycle: experimental
+  owner: admin
