@@ -70,6 +70,7 @@ spec:
         description: This is ${{ parameters.componentId }}
         repoUrl: ${{ parameters.repoUrl }}
         repoVisibility: public
+        defaultBranch: main
 
     - id: register
       name: Register
