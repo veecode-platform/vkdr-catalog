@@ -10,7 +10,7 @@ metadata:
     backstage.io/techdocs-ref: dir:..
     github.com/workflows: publish.yml,remove.yml
     kong-manager/service-name: app.${{ values.componentId }}.80
-    kong-manager/instance: ${{ values.cluster_name }}
+    kong-manager/instance: cluster-vkdr-local   
 spec:
   type: devops
   lifecycle: experimental
