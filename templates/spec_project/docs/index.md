@@ -46,27 +46,6 @@ Este template facilita a criação de um pipeline de automação no GitHub, perm
 
 ---
 
-## **Passos de Execução**
-
-Após o preenchimento dos parâmetros, o Backstage irá executar os seguintes passos:
-
-1. **Create File**
-   - Gera o arquivo `openapi-swagger.yaml` no repositório, com base no conteúdo fornecido em `UploadSpec`.
-
-2. **Transform Input in Base64**
-   - Converte o conteúdo do `kubeconfig` em base64 para uso nos passos seguintes.
-
-3. **Fetch Skeleton + Template**
-   - Faz o download do esqueleto do template e aplica as variáveis fornecidas para configurar os arquivos do projeto, incluindo `componentId`, `description`, `owner`, `specTags`, `repoUrl`, e `kubeconfig`.
-
-4. **Publish no GitHub**
-   - Publica o repositório no GitHub com o `componentId`, configurando a visibilidade e associando o segredo `VKDR_LOCAL_KUBECONFIG`.
-
-5. **Registro no Catálogo do Backstage**
-   - Registra o repositório e adiciona o componente ao catálogo do Backstage usando o arquivo `/catalog-info.yaml`.
-
----
-
 ## **Links de Saída**
 
 Após a conclusão dos passos, o Backstage irá gerar os seguintes links:
