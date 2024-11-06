@@ -1,55 +1,54 @@
-# **Guia de Preenchimento do Template: Spec Project**
+# **Template Filling Guide: Spec Project**
 
-Este template facilita a criação de um pipeline de automação no GitHub, permitindo gerar artefatos Kong/Kubernetes a partir de um arquivo de especificação OpenAPI 3. A configuração é integrada ao Backstage, com opções de customização para repositório, visibilidade e detalhes do projeto.
+This template facilitates the creation of an automation pipeline in GitHub, allowing the generation of Kong/Kubernetes artifacts from an OpenAPI 3 specification file. The configuration is integrated with Backstage, with customization options for repository, visibility, and project details.
 
-## **Preenchendo os Campos do Template**
+## **Filling in the Template Fields**
 
 ### 1. **Catalog Details**
-   **Descrição**: Nesta seção, forneça informações básicas do projeto, incluindo o nome e o proprietário.
+   **Description**: In this section, provide basic project information, including the name and owner.
 
-   - **componentId (Obrigatório)**: Nome único do projeto. Deve ser um identificador válido para uso em sistemas, com letras minúsculas, números, `.` (ponto), `_` (underline) e `-` (hífen).
-     - **Exemplo**: `viacep_app`
+   - **componentId (Required)**: A unique project name. It must be a valid identifier for use in systems, consisting of lowercase letters, numbers, `.` (dot), `_` (underscore), and `-` (hyphen).
+     - **Example**: `viacep_app`
 
-   - **description (Opcional)**: Descrição breve do projeto para ajudar outras pessoas a entender o propósito dele.
-     - **Exemplo**: "Geração de artefatos Kong e Kubernetes para APIs do Viacep."
+   - **description (Optional)**: A brief description of the project to help others understand its purpose.
+     - **Example**: "Generation of Kong and Kubernetes artifacts for Viacep APIs."
 
-   - **owner (Obrigatório)**: Nome do grupo ou equipe responsável pelo projeto no formato "group:nome_grupo".
-     - **Exemplo**: `group:default/engenharia`
+   - **owner (Required)**: The name of the group or team responsible for the project in the format "group:team_name".
+     - **Example**: `group:default/engineering`
 
 ### 2. **Upload Openapi 3 File**
-   **Descrição**: Selecione ou faça o upload do arquivo de especificação OpenAPI 3 que será utilizado para gerar os artefatos.
+   **Description**: Select or upload the OpenAPI 3 specification file to be used to generate the artifacts.
 
-   - **UploadSpec**: Faça upload do arquivo OpenAPI 3. Este arquivo será processado para gerar artefatos específicos de Kong/Kubernetes.
-     - **Formato Recomendado**: YAML
-     - **Dicas**: Verifique se a especificação OpenAPI está em conformidade com a versão 3 para evitar problemas de compatibilidade.
+   - **UploadSpec**: Upload the OpenAPI 3 file. This file will be processed to generate Kong/Kubernetes-specific artifacts.
+     - **Recommended Format**: YAML
+     - **Tips**: Ensure that the OpenAPI specification complies with version 3 to avoid compatibility issues.
 
 ### 3. **Spec Configuration**
-   **Descrição**: Adicione tags para categorizar e organizar o projeto.
+   **Description**: Add tags to categorize and organize the project.
 
-   - **specTags**: Insira tags separadas por vírgula para classificar o projeto.
-     - **Exemplo**: `api, kubernetes, kong`
+   - **specTags**: Enter tags separated by commas to classify the project.
+     - **Example**: `api, kubernetes, kong`
 
 ### 4. **Input your Kubeconfig**
-   **Descrição**: Insira o conteúdo do seu arquivo `kubeconfig`, que será utilizado para conexão com o cluster Kubernetes.
+   **Description**: Enter the contents of your `kubeconfig` file, which will be used to connect to the Kubernetes cluster.
 
-   - **VKDR_LOCAL_KUBECONFIG (Obrigatório)**: Cole o conteúdo do seu `kubeconfig` neste campo. 
-     - **Dicas**: Mantenha este arquivo atualizado e seguro, pois ele contém informações sensíveis de acesso ao cluster Kubernetes.
+   - **VKDR_LOCAL_KUBECONFIG (Required)**: Paste the contents of your `kubeconfig` in this field. 
+     - **Tips**: Keep this file updated and secure, as it contains sensitive access information for the Kubernetes cluster.
 
 ### 5. **Choose a location**
-   **Descrição**: Escolha a localização e a visibilidade do repositório no GitHub onde o projeto será armazenado.
+   **Description**: Choose the location and visibility of the GitHub repository where the project will be stored.
 
-   - **repoUrl (Obrigatório)**: URL do repositório GitHub onde o pipeline será criado. Use o seletor para definir a URL baseada no `componentId`.
-     - **Exemplo**: `https://github.com/seu-usuario/viacep_app`
+   - **repoUrl (Required)**: The GitHub repository URL where the pipeline will be created. Use the selector to define the URL based on the `componentId`.
+     - **Example**: `https://github.com/your-username/viacep_app`
 
-   - **visibility**: Selecione a visibilidade do repositório entre `public` e `private`.
-     - **Padrão**: `private`
+   - **visibility**: Select the repository visibility between `public` and `private`.
+     - **Default**: `private`
 
 ---
 
-## **Links de Saída**
+## **Output Links**
 
-Após a conclusão dos passos, o Backstage irá gerar os seguintes links:
+After completing the steps, Backstage will generate the following links:
 
-- **Repository**: Link direto para o repositório GitHub do projeto.
-- **Open in Catalog**: Link para acessar o componente no catálogo do Backstage.
-
+- **Repository**: Direct link to the GitHub repository of the project.
+- **Open in Catalog**: Link to access the component in the Backstage catalog.
