@@ -110,6 +110,13 @@ spec:
         path: ./openapi-swagger.yaml
         content: ${{ parameters.UploadSpec }}
         format: yaml
+
+   - id: toBase64
+     name: Transform input in base64
+     action: veecode-platform:extensions:toBase64
+     input: 
+        content: ${{ secrets.VKDR_LOCAL_KUBECONFIG }}
+        
     - id: template
       name: Fetch Skeleton + Template
       action: fetch:template
@@ -138,7 +145,7 @@ spec:
         defaultBranch: main
         protectDefaultBranch: false
         secrets:
-          VKDR_LOCAL_KUBECONFIG: ${{ secrets.VKDR_LOCAL_KUBECONFIG }}
+          VKDR_LOCAL_KUBECONFIG: ${{ steps.toBase64.output.result}}
 
     - id: register
       name: Register
