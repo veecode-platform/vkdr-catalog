@@ -140,7 +140,7 @@ spec:
         defaultBranch: main
         protectDefaultBranch: false
         secrets:
-          VKDR_LOCAL_KUBECONFIG: ${{ secrets.VKDR_LOCAL_KUBECONFIG | base64 -w 0 }}
+          VKDR_LOCAL_KUBECONFIG: ${{ secrets.VKDR_LOCAL_KUBECONFIG }}
 
     - id: register
       name: Register
