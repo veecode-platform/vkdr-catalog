@@ -5,7 +5,7 @@ on:
 env:
   PROJECT_NAME: "${{ values.componentId }}"
   HOST_NAME: "${{ values.domain }}"
-  CORS_ORIGIN_LIST: "https://devportal-homolog.apr.vee.codes,https://devportal.apr.vee.codes"
+  CORS_ORIGIN_LIST: "http://devportal.localhost:8000"
 
 jobs:
   build:
@@ -71,7 +71,7 @@ jobs:
 
           mkdir -p k8s
           cp ${TEMP_DIR}/kubernetes.yaml ./k8s/kubernetes.yaml
-
+          
       - name: Build devportal template
         env:
           NAME: ""
