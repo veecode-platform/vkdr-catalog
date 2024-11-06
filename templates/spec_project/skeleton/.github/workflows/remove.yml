@@ -19,6 +19,6 @@ jobs:
     
       - name: publish on cluster vkdr local
         run: |
-          echo ${{'${{'}} secret.VKDR_LOCAL_KUBECONFIG ${{'}}'}} | base64 -d > kubeconfig
+          echo ${{'${{'}} secrets.VKDR_LOCAL_KUBECONFIG ${{'}}'}} | base64 -d > kubeconfig
           export KUBECONFIG=kubeconfig
           kubectl delete -f ./k8s/kubernetes.yaml -n app
