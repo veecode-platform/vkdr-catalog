@@ -70,8 +70,7 @@ spec:
     - title: Input your Kubeconfig
       description: Provide kubeconfig for the resource
       required:
-        - username
-        - password
+        - VKDR_LOCAL_KUBECONFIG
       properties:
         VKDR_LOCAL_KUBECONFIG:
           title: VKDR_LOCAL_KUBECONFIG
