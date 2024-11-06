@@ -1,72 +1,71 @@
-# **Guia de Preenchimento do Template: Github Pages Simple Blog Template**
+# **Guide to Filling Out the Template: GitHub Pages Simple Blog Template**
 
-Este template automatiza a criação de um blog básico no GitHub Pages, com publicação e registro no Backstage. Siga estas instruções para completar os campos necessários e configurar seu blog com sucesso.
+This template automates the creation of a basic blog on GitHub Pages, including publishing and registration in Backstage. Follow these instructions to complete the required fields and successfully set up your blog.
 
-## **Preenchendo os Campos do Template**
+## **Filling Out the Template Fields**
 
-### 1. **Provide some simple information**
-   **Descrição**: Nesta seção, você fornecerá informações básicas sobre o blog, como o nome, a descrição e o proprietário do repositório.
+### 1. **Provide Some Basic Information**
+   **Description**: In this section, you'll provide basic information about the blog, such as its name, description, and repository owner.
 
-   - **nome-do-repositorio (Obrigatório)**: Nome único do blog, usado como identificador do componente.
-     - **Formato**: Letras minúsculas, números, `.` (ponto), `_` (underline) e `-` (hífen).
-     - **Exemplo**: `meu_blog_simples`
+   - **repository-name (Required)**: Unique blog name, used as the component identifier.
+     - **Format**: Lowercase letters, numbers, `.` (dot), `_` (underscore), and `-` (hyphen).
+     - **Example**: `my_simple_blog`
 
-   - **description (Opcional)**: Descrição curta sobre o objetivo ou conteúdo do blog.
-     - **Exemplo**: "Blog sobre tutoriais e novidades da área de DevOps".
+   - **description (Optional)**: A short description about the purpose or content of the blog.
+     - **Example**: "Blog on DevOps tutorials and updates."
 
-   - **owner (Obrigatório)**: Proprietário do componente no formato "group:grupo/nome". Esse campo é pré-preenchido como `group:default/demo`, mas você pode alterá-lo para o proprietário desejado.
-     - **Exemplo**: `group:default/engenharia`
+   - **owner (Required)**: Component owner in the format "group:group/name". This field is pre-filled as `group:default/demo`, but you can change it to the desired owner.
+     - **Example**: `group:default/engineering`
 
-### 2. **Input your Github PAT token**
-   **Descrição**: Forneça o seu Personal Access Token (PAT) do GitHub. Este token é necessário para criar e gerenciar o repositório no GitHub.
+### 2. **Input Your GitHub PAT Token**
+   **Description**: Provide your GitHub Personal Access Token (PAT). This token is necessary to create and manage the repository on GitHub.
 
-   - **PERSONAL_GITHUB_TOKEN (Obrigatório)**: Um token com permissões para criação e publicação de repositórios.
-     - **Dicas**: Certifique-se de que o token tem as permissões necessárias para ler e escrever em repositórios. Configure-o pelo GitHub com permissões mínimas recomendadas (repositório e GitHub Pages).
-     - **Onde encontrar**: [Link para gerar token](https://github.com/settings/tokens)
+   - **PERSONAL_GITHUB_TOKEN (Required)**: A token with permissions to create and publish repositories.
+     - **Tips**: Ensure that the token has the necessary permissions to read and write to repositories. Configure it on GitHub with the minimum recommended permissions (repository and GitHub Pages).
+     - **Where to find it**: [Link to generate token](https://github.com/settings/tokens)
 
-### 3. **Choose a location**
-   **Descrição**: Defina o local de criação do repositório e vincule-o ao seu GitHub.
+### 3. **Choose a Location**
+   **Description**: Set the repository creation location and link it to your GitHub.
 
-   - **repoUrl (Obrigatório)**: URL do repositório GitHub onde o blog será hospedado.
-     - **Formato**: Use o campo de seleção para escolher o host (somente `github.com` é permitido). O valor será preenchido automaticamente com o `nome-do-repositorio`.
-     - **Exemplo**: `https://github.com/seu-usuario/meu_blog_simples`
+   - **repoUrl (Required)**: GitHub repository URL where the blog will be hosted.
+     - **Format**: Use the selection field to choose the host (only `github.com` is allowed). The value will be automatically filled with the `repository-name`.
+     - **Example**: `https://github.com/your-username/my_simple_blog`
 
 ---
 
-## **Passos de Execução**
+## **Execution Steps**
 
-Após o preenchimento dos parâmetros, o Backstage irá executar automaticamente os seguintes passos:
+After filling out the parameters, Backstage will automatically execute the following steps:
 
 1. **Fetch Skeleton + Template**
-   - Faz o download do esqueleto e aplica os dados fornecidos aos arquivos do template.
+   - Downloads the skeleton and applies the provided data to the template files.
 
-2. **Publicação no GitHub**
-   - Publica o repositório no GitHub com o `nome-do-repositorio` e define o repositório como `public`. **Observação**: Todos os repositórios criados por este template serão públicos.
+2. **Publish to GitHub**
+   - Publishes the repository on GitHub with the `repository-name` and sets the repository as `public`. **Note**: All repositories created by this template will be public.
 
-3. **Habilitar GitHub Pages**
-   - O Backstage habilitará automaticamente o GitHub Pages para o repositório, configurando a branch principal (`main`) como fonte e o diretório `root` como diretório de origem.
-   - **Endpoint Gerado**: O endereço do blog será:
+3. **Enable GitHub Pages**
+   - Backstage will automatically enable GitHub Pages for the repository, setting the main branch (`main`) as the source and the `root` directory as the source directory.
+   - **Generated Endpoint**: The blog address will be:
      ```
-     https://<seu-usuario>.github.io/<nome-do-repositorio>/
+     https://<your-username>.github.io/<repository-name>/
      ```
-     **Exemplo**: Se o `nome-do-repositorio` for `meu_blog_simples` e seu nome de usuário GitHub for `seu-usuario`, o endereço do blog será:
+     **Example**: If the `repository-name` is `my_simple_blog` and your GitHub username is `your-username`, the blog address will be:
      ```
-     https://seu-usuario.github.io/meu_blog_simples/
+     https://your-username.github.io/my_simple_blog/
      ```
 
-4. **Registro no Catálogo do Backstage**
-   - Registra o repositório e adiciona o componente no catálogo do Backstage usando o caminho `/catalog-info.yaml`.
+4. **Register in the Backstage Catalog**
+   - Registers the repository and adds the component in the Backstage catalog using the path `/catalog-info.yaml`.
 
 ---
 
-## **Links de Saída**
+## **Output Links**
 
-Após a conclusão dos passos, o Backstage irá gerar links úteis:
+After completing the steps, Backstage will generate useful links:
 
-- **Repository**: Link direto para o repositório GitHub do blog.
-- **Open in Catalog**: Link para acessar o componente no catálogo do Backstage.
-- **Blog Endpoint**: Link direto para o blog no GitHub Pages:
+- **Repository**: Direct link to the GitHub blog repository.
+- **Open in Catalog**: Link to access the component in the Backstage catalog.
+- **Blog Endpoint**: Direct link to the blog on GitHub Pages:
   ```
-  https://<seu-usuario>.github.io/<nome-do-repositorio>/
+  https://<your-username>.github.io/<repository-name>/
   ```
-
