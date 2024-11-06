@@ -82,7 +82,7 @@ jobs:
           NAME=`echo $PROJECT_NAME`
           echo $NAME
           touch ".platform/spec-api.yaml"
-          yq ".servers = [{\"url\": \"https://$HOST_NAME/$PROJECT_NAME\"}]" -i ./openapi-swagger.yaml
+          yq ".servers = [{\"url\": \"https://$HOST_NAME:8000/$PROJECT_NAME\"}]" -i ./openapi-swagger.yaml
           sed --in-place "s|\"|'|g" ./openapi-swagger.yaml
           yq eval ".apiVersion = \"backstage.io/v1alpha1\"" -i ".platform/spec-api.yaml"
           yq eval ".kind = \"API\" " -i ".platform/spec-api.yaml"
