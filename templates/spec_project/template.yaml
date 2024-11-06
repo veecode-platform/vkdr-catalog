@@ -119,7 +119,7 @@ spec:
           componentId: ${{ parameters.componentId }}
           description: ${{ parameters.description }}
           owner: ${{ parameters.owner }}
-          domain: localhost:8000 
+          domain: localhost 
           #Spec configuration
           specTags: ${{ parameters.specTags }}
           #location configuration      

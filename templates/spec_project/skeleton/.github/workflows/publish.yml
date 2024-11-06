@@ -42,11 +42,11 @@ jobs:
           declare COUNT=0
           for KEY in "${!serviceMap[@]}"; do
               NEW_SERVICE_NAME="$PROJECT_NAME"
-              yq e ".servers = [{\"url\": \"https://$HOST_NAME/$NEW_SERVICE_NAME\"}]" -i ${TEMP_DIR}/openapi-swagger.yaml
+              yq e ".servers = [{\"url\": \"http://$HOST_NAME:8000/$NEW_SERVICE_NAME\"}]" -i ${TEMP_DIR}/openapi-swagger.yaml
               if [ $COUNT -gt 0 ]; then
                 NEW_SERVICE_NAME="$PROJECT_NAME-$COUNT"
                 # echo "---" >> ${TEMP_DIR}/service.yaml
-                yq e ".servers += [{\"url\": \"https://$HOST_NAME/$NEW_SERVICE_NAME\"}]" -i ${TEMP_DIR}/openapi-swagger.yaml
+                yq e ".servers += [{\"url\": \"http://$HOST_NAME:8000/$NEW_SERVICE_NAME\"}]" -i ${TEMP_DIR}/openapi-swagger.yaml
               fi
               # kubectl create service externalname  $NEW_SERVICE_NAME --external-name ${serviceMap[$KEY]} --dry-run=client -o=yaml | \
               # yq -e 'del(.spec.selector) | del(.metadata.creationTimestamp) | del(.status) | del(.metadata.labels)' >> ${TEMP_DIR}/service.yaml
@@ -71,7 +71,7 @@ jobs:
 
           mkdir -p k8s
           cp ${TEMP_DIR}/kubernetes.yaml ./k8s/kubernetes.yaml
-          
+
       - name: Build devportal template
         env:
           NAME: ""
