@@ -38,6 +38,18 @@ spec:
           ui:options:
             allowedKinds:
               - Group
+
+    - title: Input your Github PAT token
+      description: Provide your personal access token for the resource
+      required:
+        - PERSONAL_GITHUB_TOKEN
+      properties:
+        PERSONAL_GITHUB_TOKEN:
+          title: PERSONAL_GITHUB_TOKEN
+          type: string
+          # use the built in Secret field extension
+          ui:field: Secret
+
     - title: Choose a location
       required:
         - repoUrl
@@ -71,6 +83,16 @@ spec:
         repoUrl: ${{ parameters.repoUrl }}
         repoVisibility: public
         defaultBranch: main
+
+    - id: github-pages
+      action: github:pages:enable
+      name: Enable GitHub Pages
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+        buildType: legacy
+        sourceBranch: main
+        sourcePath: /
+        token: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
 
     - id: register
       name: Register
