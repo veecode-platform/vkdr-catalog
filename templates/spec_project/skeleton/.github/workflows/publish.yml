@@ -1,0 +1,95 @@
+name: spec-project
+on: 
+  workflow_dispatch:
+
+env:
+  PROJECT_NAME: "${{ values.componentId }}"
+  HOST_NAME: "${{ values.domain }}"
+  CORS_ORIGIN_LIST: "https://devportal-homolog.apr.vee.codes,https://devportal.apr.vee.codes"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installing Kong Deck CLI
+        uses: kong/setup-deck@v1
+
+      - name: Generating K8s Artefacts for external service
+        run: |
+          TEMP_DIR=$(mktemp -d)
+          touch ${TEMP_DIR}/service.yaml ${TEMP_DIR}/kong-plugin.yaml
+          cp openapi-swagger.yaml ${TEMP_DIR}/openapi-swagger.yaml
+          SERVER=$(yq -e '.servers[0].url' ${TEMP_DIR}/openapi-swagger.yaml | sed 's:/*$::')
+          EXTERNAL_HOST_NAME=$(echo $SERVER | sed 's~http[s]*://~~' | cut -d'/' -f1)
+          EXTERNAL_PATH=$(echo $SERVER | sed 's~http[s]*://~~' | grep '/' | cut -d'/' -f2-)
+          if [ -z "$EXTERNAL_PATH" ]; then
+            yq e ".paths |= with_entries(.key |= \"/$PROJECT_NAME\" + .)" -i ${TEMP_DIR}/openapi-swagger.yaml
+          else
+            yq e ".paths |= with_entries(.key |= \"/$PROJECT_NAME/$EXTERNAL_PATH\" + .)" -i ${TEMP_DIR}/openapi-swagger.yaml
+          fi
+          deck file openapi2kong --spec ${TEMP_DIR}/openapi-swagger.yaml | deck file kong2kic --ingress  --output-file ${TEMP_DIR}/kong.yaml
+          # yq e 'del(select(.kind == "Service" or .kind == "KongUpstreamPolicy"))' -i ${TEMP_DIR}/kong.yaml
+          readarray -t ingressEntries < <(yq -e -o=j -I=0 'select(.kind == "Ingress")' ${TEMP_DIR}/kong.yaml)
+          declare -A serviceMap
+          for INGRESS_ENTRY in "${ingressEntries[@]}"; do
+              service_name=$(echo "$INGRESS_ENTRY" | yq -e '.spec.rules[].http.paths[].backend.service.name' -)
+              serviceMap["$service_name"]=$EXTERNAL_HOST_NAME
+          done
+          declare COUNT=0
+          for KEY in "${!serviceMap[@]}"; do
+              NEW_SERVICE_NAME="$PROJECT_NAME"
+              yq e ".servers = [{\"url\": \"https://$HOST_NAME/$NEW_SERVICE_NAME\"}]" -i ${TEMP_DIR}/openapi-swagger.yaml
+              if [ $COUNT -gt 0 ]; then
+                NEW_SERVICE_NAME="$PROJECT_NAME-$COUNT"
+                # echo "---" >> ${TEMP_DIR}/service.yaml
+                yq e ".servers += [{\"url\": \"https://$HOST_NAME/$NEW_SERVICE_NAME\"}]" -i ${TEMP_DIR}/openapi-swagger.yaml
+              fi
+              # kubectl create service externalname  $NEW_SERVICE_NAME --external-name ${serviceMap[$KEY]} --dry-run=client -o=yaml | \
+              # yq -e 'del(.spec.selector) | del(.metadata.creationTimestamp) | del(.status) | del(.metadata.labels)' >> ${TEMP_DIR}/service.yaml
+              yq -e "(select(.kind == \"Ingress\") | .spec.rules[].http.paths[].backend.service.name) = \"$NEW_SERVICE_NAME\" |
+                    (select(.kind == \"Ingress\") | .metadata.name) = \"$NEW_SERVICE_NAME-\"+.metadata.name" -i ${TEMP_DIR}/kong.yaml
+              COUNT=$((COUNT+1))
+          done
+
+          yq ${TEMP_DIR}/kong-plugin.yaml ${TEMP_DIR}/service.yaml ${TEMP_DIR}/kong.yaml > ${TEMP_DIR}/kubernetes.yaml
+          yq -e "(select(.kind == \"Ingress\").spec.rules[].host) = \"${HOST_NAME}\"" -i ${TEMP_DIR}/kubernetes.yaml
+          yq -e '(select(.kind == "Ingress") | .spec.rules[].http.paths[].backend.service.port.number)=80' -i ${TEMP_DIR}/kubernetes.yaml
+          # yq -e "(select(.kind == \"Service\") | .metadata.annotations.\"konghq.com/plugins\") += \"$PROJECT_NAME-cors,http-log-example,strip-prefix-plugin\"" -i ${TEMP_DIR}/kubernetes.yaml
+          yq -e '(select(.kind == "Ingress") | .metadata.annotations."konghq.com/preserve-host")="false"' -i ${TEMP_DIR}/kubernetes.yaml
+          yq -e '(select(.kind == "Service") | .spec)={}' -i ${TEMP_DIR}/kubernetes.yaml
+          yq -e '(select(.kind == "Service") | .spec.type)="ExternalName"' -i ${TEMP_DIR}/kubernetes.yaml
+          yq -e "(select(.kind == \"Service\") | .spec.externalName)=\"$EXTERNAL_HOST_NAME\"" -i ${TEMP_DIR}/kubernetes.yaml
+          yq -e "(select(.kind == \"Service\") | .metadata.name) = \"$NEW_SERVICE_NAME\"" -i ${TEMP_DIR}/kubernetes.yaml
+          yq -e '(select(.kind == "Service") | .metadata.annotations."konghq.com/protocol") = "http"' -i ${TEMP_DIR}/kubernetes.yaml
+          rm ${TEMP_DIR}/service.yaml ${TEMP_DIR}/kong.yaml ${TEMP_DIR}/kong-plugin.yaml
+          echo "Final version: cat ${TEMP_DIR}/kubernetes.yaml"
+          echo "new OpenAPI: cat ${TEMP_DIR}/openapi-swagger.yaml"
+
+          mkdir -p k8s
+          cp ${TEMP_DIR}/kubernetes.yaml ./k8s/kubernetes.yaml
+
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          mv kubectl /usr/local/bin/
+
+      - name: publish on cluster vkdr local
+        run: |
+          echo ${{'${{'}} secret.VKDR_LOCAL_KUBECONFIG ${{'${{'}} | base64 -d > kubeconfig
+          export KUBECONFIG=./kubeconfig
+          kubectl create ns app --dry-run=client -o yaml | kubectl apply -f -
+          kubectl apply -f ./k8s/kubernetes.yaml -n app
+
+      - name: Publish spec
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          repository: "./k8s"
+          commit_message: "Publish K8s artefacts for ${{ values.componentId }}"
+          push_options: '--force'          
+
+         
