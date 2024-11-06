@@ -111,11 +111,11 @@ spec:
         content: ${{ parameters.UploadSpec }}
         format: yaml
 
-   - id: toBase64
-     name: Transform input in base64
-     action: veecode-platform:extensions:toBase64
-     input: 
-        content: ${{ secrets.VKDR_LOCAL_KUBECONFIG }}
+    - id: toBase64
+      name: Transform input in base64
+      action: veecode-platform:extensions:toBase64
+      input: 
+          content: ${{ secrets.VKDR_LOCAL_KUBECONFIG }}
         
     - id: template
       name: Fetch Skeleton + Template
