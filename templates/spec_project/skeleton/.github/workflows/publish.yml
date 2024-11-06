@@ -72,6 +72,30 @@ jobs:
           mkdir -p k8s
           cp ${TEMP_DIR}/kubernetes.yaml ./k8s/kubernetes.yaml
 
+      - name: Build devportal template
+        env:
+          NAME: ""
+          PATH_API: ""
+          TAGS: "${{values.specTags}}"
+        run: |
+          mkdir -p api/
+          NAME=`echo $PROJECT_NAME`
+          echo $NAME
+          touch ".platform/spec-api.yaml"
+          yq ".servers = [{\"url\": \"https://$HOST_NAME/$PROJECT_NAME\"}]" -i ./openapi-swagger.yaml
+          sed --in-place "s|\"|'|g" ./openapi-swagger.yaml
+          yq eval ".apiVersion = \"backstage.io/v1alpha1\"" -i ".platform/spec-api.yaml"
+          yq eval ".kind = \"API\" " -i ".platform/spec-api.yaml"
+          yq eval ".metadata.name=strenv(NAME)" -i ".platform/spec-api.yaml"
+          yq eval ".metadata.title=strenv(NAME)" -i ".platform/spec-api.yaml"
+          yq eval ".metadata.publishedAt=\"$(date '+%Y-%m-%d %T')\"" -i ".platform/spec-api.yaml"
+          yq eval ".metadata.description= \"$(cat ./openapi-swagger.yaml | yq e '.info.description')\"" -i ".platform/spec-api.yaml"
+          yq eval ".metadata.tags = (strenv(TAGS) | sub(\" +\", \"\") | split(\",\"))" -i ".platform/spec-api.yaml"
+          yq eval ".spec.type = \"openapi\"" -i ".platform/spec-api.yaml"
+          yq eval ".spec.lifecycle = \"production\"" -i ".platform/spec-api.yaml"
+          yq eval ".spec.owner = \"consumer\"" -i ".platform/spec-api.yaml"
+          yq eval ".spec.definition = \"$(yq -I4 ./openapi-swagger.yaml)\"" --inplace ".platform/spec-api.yaml"          
+
       - name: Install kubectl
         run: |
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -80,7 +104,7 @@ jobs:
 
       - name: publish on cluster vkdr local
         run: |
-          echo ${{'${{'}} secret.VKDR_LOCAL_KUBECONFIG ${{'${{'}} | base64 -d > kubeconfig
+          echo ${{'${{'}} secret.VKDR_LOCAL_KUBECONFIG ${{'}}'}} | base64 -d > kubeconfig
           export KUBECONFIG=./kubeconfig
           kubectl create ns app --dry-run=client -o yaml | kubectl apply -f -
           kubectl apply -f ./k8s/kubernetes.yaml -n app
@@ -88,7 +112,7 @@ jobs:
       - name: Publish spec
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          repository: "./k8s"
+          repository: "."
           commit_message: "Publish K8s artefacts for ${{ values.componentId }}"
           push_options: '--force'          
 

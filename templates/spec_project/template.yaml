@@ -127,6 +127,7 @@ spec:
           #location configuration      
           repoUrl: ${{ parameters.repoUrl | parseRepoUrl | pick('owner') }}/${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}
           host: ${{ parameters.repoUrl | parseRepoUrl | pick('host') }}
+
     - id: publish
       name: Publish
       action: publish:github
@@ -139,7 +140,7 @@ spec:
         defaultBranch: main
         protectDefaultBranch: false
         secrets:
-          VKDR_LOCAL_KUBECONFIG: ${{ secret.VKDR_LOCAL_KUBECONFIG }}
+          VKDR_LOCAL_KUBECONFIG: ${{ secrets.VKDR_LOCAL_KUBECONFIG }}
 
     - id: register
       name: Register
