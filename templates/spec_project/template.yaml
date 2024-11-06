@@ -92,8 +92,6 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
-            allowedOwners:
-              - veecode-homolog
         visibility:
           title: Repository visibility
           type: string
