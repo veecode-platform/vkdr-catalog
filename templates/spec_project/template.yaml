@@ -76,7 +76,11 @@ spec:
           title: VKDR_LOCAL_KUBECONFIG
           type: string
           # use the built in Secret field extension
-          ui:field: Secret
+          # ui:field: Secret
+          ui:widget: textarea
+          ui:backstage:
+            review:
+              show: false          
 
     ### Location Configuration
     - title: Choose a location
@@ -115,7 +119,7 @@ spec:
       name: Transform input in base64
       action: veecode-platform:extensions:toBase64
       input: 
-          content: ${{ secrets.VKDR_LOCAL_KUBECONFIG }}
+        content: ${{ parameters.VKDR_LOCAL_KUBECONFIG }}
         
     - id: template
       name: Fetch Skeleton + Template
@@ -132,6 +136,7 @@ spec:
           #location configuration      
           repoUrl: ${{ parameters.repoUrl | parseRepoUrl | pick('owner') }}/${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}
           host: ${{ parameters.repoUrl | parseRepoUrl | pick('host') }}
+          kubeconfig: ${{ steps.toBase64.output.result }}
 
     - id: publish
       name: Publish
