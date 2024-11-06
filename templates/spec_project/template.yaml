@@ -78,9 +78,6 @@ spec:
           type: string
           # use the built in Secret field extension
           ui:field: Secret
-        password:
-          type: string
-          ui:field: Secret
 
     ### Location Configuration
     - title: Choose a location
