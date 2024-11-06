@@ -1,4 +1,5 @@
-name: spec-project
+name: publish-project
+
 on: 
   workflow_dispatch:
 
