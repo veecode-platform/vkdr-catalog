@@ -1,27 +1,27 @@
-# Blog Jekyll
+# Jekyll Blog
 
-Este é um exemplo de blog criado com o [Jekyll](https://jekyllrb.com/), um gerador de site estático simples e flexível. O blog é hospedado utilizando [GitHub Pages](https://pages.github.com/) e serve como um exemplo básico de como configurar e personalizar um blog estático.
+This is an example of a blog created with [Jekyll](https://jekyllrb.com/), a simple and flexible static site generator. The blog is hosted using [GitHub Pages](https://pages.github.com/) and serves as a basic example of how to set up and customize a static blog.
 
-## Acessar o Blog
+## Access the Blog
 
-Você pode acessar o blog através do link abaixo:
+You can access the blog through the link below:
 
-- Blog Jekyll - GitHub Pages - https://${{ values.owner_github }}.github.io/${{ values.repo_github }}
+- Jekyll Blog - GitHub Pages - https://${{ values.owner_github }}.github.io/${{ values.repo_github }}
 
-> Substitua `username` e `repository-name` pelo seu nome de usuário do GitHub e pelo nome do repositório, respectivamente.
+> Replace `username` and `repository-name` with your GitHub username and repository name, respectively.
 
-## Funcionalidades do Blog
+## Blog Features
 
-O blog inclui as seguintes funcionalidades:
+The blog includes the following features:
 
-- **Postagens**: Adicionar e visualizar postagens de blog com títulos, datas e conteúdo.
-- **Categorias e Tags**: Organize suas postagens em categorias e adicione tags para facilitar a busca.
-- **Comentários**: (Opcional) Adicionar integração com serviços como Disqus para comentários.
-- **Layouts Personalizáveis**: Modifique o design do blog com diferentes layouts e temas.
+- **Posts**: Add and view blog posts with titles, dates, and content.
+- **Categories and Tags**: Organize your posts into categories and add tags for easy searching.
+- **Comments**: (Optional) Add integration with services like Disqus for comments.
+- **Customizable Layouts**: Modify the blog design with different layouts and themes.
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-- **Jekyll**: Framework para gerar sites estáticos a partir de arquivos Markdown.
-- **GitHub Pages**: Serviço de hospedagem gratuita para sites estáticos, integrado ao GitHub.
-- **Markdown**: Linguagem de marcação simples usada para escrever o conteúdo do blog.
-- **Liquid**: Motor de template usado para gerar os layouts dinâmicos no Jekyll.
+- **Jekyll**: Framework to generate static sites from Markdown files.
+- **GitHub Pages**: Free hosting service for static sites, integrated with GitHub.
+- **Markdown**: Simple markup language used to write the blog content.
+- **Liquid**: Template engine used to generate dynamic layouts in Jekyll.
