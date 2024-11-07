@@ -73,6 +73,9 @@ spec:
           description: ${{ parameters.description }}
           repoUrl: ${{ (parameters.repoUrl | parseRepoUrl).owner }}/${{ (parameters.repoUrl | parseRepoUrl).repo }}
           owner: ${{ parameters.owner }}
+          owner_github: ${{ parameters.repoUrl | parseRepoUrl | pick("owner") }}
+          repo_github: ${{ parameters.repoUrl | parseRepoUrl | pick("repo") }}
+
 
     - id: publish
       name: Publish
