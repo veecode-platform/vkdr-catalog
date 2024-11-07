@@ -8,6 +8,7 @@ metadata:
   annotations:
     github.com/project-slug: ${{values.repoUrl}}
     backstage.io/techdocs-ref: dir:.
+    github.com/workflows: ci.yml
 spec:
   type: website
   lifecycle: experimental
