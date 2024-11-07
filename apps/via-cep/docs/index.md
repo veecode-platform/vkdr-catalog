@@ -6,7 +6,7 @@ ViaCEP is a sample application , demonstrating the basic functionality of a web 
 
 Access the application through the following link:
 
-- ViaCEP - Local Environment - http://localhost:8000/cep/<you-cep-code>/json
+- ViaCEP - Local Environment - http://localhost:8000/cep/you-cep-code/json
 
 ## Query Features
 
