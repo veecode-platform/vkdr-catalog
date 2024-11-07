@@ -9,5 +9,7 @@ spec:
     - ./environments/environment-vkdr-local.yaml
     - ./clusters/cluster-vkdr-local.yaml
     - ./apis/*.yaml
-    - ./apps/*.yaml
+    - ./apps/petclinic/petclinic.yaml
+    - ./apps/via-cep/via-cep.yaml
+
 
