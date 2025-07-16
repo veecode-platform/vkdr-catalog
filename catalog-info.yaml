@@ -8,6 +8,7 @@ spec:
     - ./templates/templates.yaml
     - ./environments/environment-vkdr-local.yaml
     - ./clusters/cluster-vkdr-local.yaml
+    - ./groups/*.yaml
     # - ./apis/*.yaml
     # - ./clusters/clusters.yaml
     # - ./components/components.yaml
