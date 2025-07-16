@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
-  name: default/admin
+  name: admin
   description: DevPortal Administrators
 spec:
   type: group
