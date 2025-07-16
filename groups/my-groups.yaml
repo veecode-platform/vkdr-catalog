@@ -1,3 +1,20 @@
+
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: veecode
+  description: VeeCode organization
+  links:
+    - url: https://platform.vee.codes/
+      title: Website
+spec:
+  type: Organization
+  profile:
+    displayName: VeeCode
+    email: veecode@example.com
+    picture: https://api.dicebear.com/7.x/identicon/svg?seed=Maggie&flip=true&backgroundColor=ffdfbf
+  children: [admin]
+
 apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
@@ -9,5 +26,5 @@ spec:
     # Intentional no displayName for testing
     email: admin@example.com
     picture: https://api.dicebear.com/7.x/identicon/svg?seed=Fluffy&backgroundType=solid,gradientLinear&backgroundColor=ffd5dc,b6e3f4
-  parent: 
+  parent: veecode 
   children: []
