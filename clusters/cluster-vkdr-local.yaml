@@ -2,13 +2,22 @@ apiVersion: veecode.backstage.io/v1alpha1
 kind: Cluster
 metadata:
   name: "cluster-vkdr-local"
+  description: "VKDR Local Cluster (k3d)"
   environment:
     domain: localhost
     ingress_type: kong
   annotations:
     github.com/project-slug: veecode-platform/vkdr-catalog
+    veecode/cluster-name: "cluster-vkdr-local"  #annotations for cluster plugin
+    backstage.io/kubernetes-id: cluster-vkdr-local
+    kubernetes.io/secret-name: devportal-cluster-secret
+    kubernetes.io/secret-namespace: platform
+    kubernetes.io/auth-provider: serviceAccount
+    kubernetes.io/api-server: https://kubernetes.default.svc
+    kubernetes.io/skip-tls-verify: "true"
+    kubernetes.io/skip-metrics-lookup: "false"
 spec:
-  type: ec2
+  type: devops
   lifecycle: experimental
   owner: "group:default/admin"
   environment: 'environment:default/environment-vkdr-local'
