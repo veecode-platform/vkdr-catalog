@@ -10,7 +10,6 @@ metadata:
     github.com/project-slug: veecode-platform/vkdr-catalog
     veecode/cluster-name: "cluster-vkdr-local"  #annotations for cluster plugin
     backstage.io/kubernetes-id: cluster-vkdr-local
-    backstage.io/kubernetes-namespace: platform
     kubernetes.io/secret-name: devportal-cluster-secret
     kubernetes.io/secret-namespace: platform
     kubernetes.io/auth-provider: serviceAccount
