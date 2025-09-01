@@ -3,6 +3,8 @@ kind: Location
 metadata:
   name: platform-vkdr-devportal-catalog-info
   description: Importing templates, apis, environments, clusters and teams
+  annotations:
+    backstage.io/techdocs-ref: dir:.   # TechDocs reads docs from this repo/path
 spec:
   targets:
     - ./templates/templates.yaml
